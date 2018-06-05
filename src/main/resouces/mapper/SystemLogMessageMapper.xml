@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fly.dao.SystemLogMessageMapper">
+  <resultMap id="BaseResultMap" type="com.fly.bean.business.SystemLogMessage">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="roles" jdbcType="VARCHAR" property="roles" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="params" jdbcType="VARCHAR" property="params" />
+    <result column="start_time" jdbcType="DATE" property="startTime" />
+    <result column="sum_time" jdbcType="VARCHAR" property="sumTime" />
+    <result column="successful" jdbcType="VARCHAR" property="successful" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.fly.bean.business.SystemLogMessage">
+    <result column="exception" jdbcType="LONGVARCHAR" property="exception" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, roles, method, description, params, start_time, sum_time, successful
+  </sql>
+  <sql id="Blob_Column_List">
+    exception
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from systemlogmessage
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from systemlogmessage
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fly.bean.business.SystemLogMessage">
+    insert into systemlogmessage (id, name, roles, 
+      method, description, params, 
+      start_time, sum_time, successful, 
+      exception)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{roles,jdbcType=VARCHAR}, 
+      #{method,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{params,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=DATE}, #{sumTime,jdbcType=VARCHAR}, #{successful,jdbcType=VARCHAR}, 
+      #{exception,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fly.bean.business.SystemLogMessage">
+    insert into systemlogmessage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="roles != null">
+        roles,
+      </if>
+      <if test="method != null">
+        method,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="params != null">
+        params,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="sumTime != null">
+        sum_time,
+      </if>
+      <if test="successful != null">
+        successful,
+      </if>
+      <if test="exception != null">
+        exception,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="roles != null">
+        #{roles,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="params != null">
+        #{params,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=DATE},
+      </if>
+      <if test="sumTime != null">
+        #{sumTime,jdbcType=VARCHAR},
+      </if>
+      <if test="successful != null">
+        #{successful,jdbcType=VARCHAR},
+      </if>
+      <if test="exception != null">
+        #{exception,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fly.bean.business.SystemLogMessage">
+    update systemlogmessage
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="roles != null">
+        roles = #{roles,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        method = #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="params != null">
+        params = #{params,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=DATE},
+      </if>
+      <if test="sumTime != null">
+        sum_time = #{sumTime,jdbcType=VARCHAR},
+      </if>
+      <if test="successful != null">
+        successful = #{successful,jdbcType=VARCHAR},
+      </if>
+      <if test="exception != null">
+        exception = #{exception,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.fly.bean.business.SystemLogMessage">
+    update systemlogmessage
+    set name = #{name,jdbcType=VARCHAR},
+      roles = #{roles,jdbcType=VARCHAR},
+      method = #{method,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      params = #{params,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=DATE},
+      sum_time = #{sumTime,jdbcType=VARCHAR},
+      successful = #{successful,jdbcType=VARCHAR},
+      exception = #{exception,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fly.bean.business.SystemLogMessage">
+    update systemlogmessage
+    set name = #{name,jdbcType=VARCHAR},
+      roles = #{roles,jdbcType=VARCHAR},
+      method = #{method,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      params = #{params,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=DATE},
+      sum_time = #{sumTime,jdbcType=VARCHAR},
+      successful = #{successful,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
